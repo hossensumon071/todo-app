@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-const AddTask = () => {
+const AddTask = ({tasks , setTasks}) => {
   const [task, setTask] = useState('');
   const inputRef = useRef(null)
 
@@ -16,14 +16,18 @@ const AddTask = () => {
   // task posting
   const taskPosting = async(text) => {
     const res = await fetch(
-      'https://aluminum-delicate-snowshoe.glitch.me/tasks', {
+      'https://lively-juniper-breeze.glitch.me/tasks', {
        method: 'POST',
        headers: {
         "content-type": "application/json"
        },
        body: JSON.stringify({ text })
-      })
-  }
+      });
+
+      const data = await res.json();
+      // real time data updation 
+      setTasks([...tasks, data])
+  };
   return (
     <form className="bg-gray-900 container mx-auto flex justify-between p-10" onSubmit={addTaskHandler}>
       <input
