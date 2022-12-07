@@ -52,7 +52,7 @@ function App() {
       <DeleteHandlerContext.Provider value={handleDelete}>
         <Header></Header>
         <AddTask tasks={tasks} setTasks={setTasks}></AddTask>
-        <TaskList tasks={tasks}></TaskList>
+        <TaskList tasks={tasks} error={error} loading={loading}></TaskList>
         <Footer></Footer>
       </DeleteHandlerContext.Provider>
     </div>
