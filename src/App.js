@@ -7,7 +7,9 @@ import TaskList from "./components/TaskList";
 export const DeleteHandlerContext  = createContext()
 
 function App() {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     // getting data from the server
@@ -22,8 +24,9 @@ function App() {
       if(!res.ok) throw new Error('Something went wrong');
       const data = await res.json();
       setTasks(data)
+      setLoading(false)
     } catch (error) {
-      console.log(error.message)
+      setError(error.message)
     }
   };
   // delete event
